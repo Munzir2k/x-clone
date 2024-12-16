@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/app/Provider/ThemeProvider";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const geistSans = localFont({
     src: "./fonts/GeistVF.woff",
@@ -27,19 +28,30 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
-            <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-            >
-                <ThemeProvider
-                    attribute="class"
-                    defaultTheme="system"
-                    enableSystem
-                    disableTransitionOnChange
+        <ClerkProvider
+            appearance={{
+                layout: {
+                    logoImageUrl: "/icons/x_logo.svg",
+                },
+                variables: {
+                    colorBackground: "#999",
+                },
+            }}
+        >
+            <html lang="en">
+                <body
+                    className={`${geistSans.variable} ${geistMono.variable} antialiased`}
                 >
-                    {children}
-                </ThemeProvider>
-            </body>
-        </html>
+                    <ThemeProvider
+                        attribute="class"
+                        defaultTheme="system"
+                        enableSystem
+                        disableTransitionOnChange
+                    >
+                        {children}
+                    </ThemeProvider>
+                </body>
+            </html>
+        </ClerkProvider>
     );
 }
