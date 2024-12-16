@@ -6,7 +6,7 @@ import * as React from "react";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "../components/button";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -21,7 +21,7 @@ export function ThemeToggle() {
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button
-                    className="rounded-full focus-visible:ring-0 focus-visible:ring-offset-0"
+                    className="rounded-full focus-visible:ring-0 focus-visible:ring-offset-0 hover:bggray"
                     variant="outline"
                     size="icon"
                 >
@@ -31,10 +31,16 @@ export function ThemeToggle() {
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setTheme("light")}>
+                <DropdownMenuItem
+                    className="dark:hover:bg-gray-800 hover:bg-gray-200"
+                    onClick={() => setTheme("light")}
+                >
                     Light
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("dark")}>
+                <DropdownMenuItem
+                    className="dark:hover:bg-gray-800 hover:bg-gray-200"
+                    onClick={() => setTheme("dark")}
+                >
                     Dark
                 </DropdownMenuItem>
             </DropdownMenuContent>
