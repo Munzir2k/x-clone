@@ -6,11 +6,11 @@ import { HiHome } from "react-icons/hi";
 import { FaXTwitter } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { SignOutButton, useAuth } from "@clerk/nextjs";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 const Sidebar = () => {
+    const { data: session } = useSession();
     const router = useRouter();
-    const { userId } = useAuth();
 
     return (
         <div className="flex flex-col gap-4">
@@ -22,10 +22,21 @@ const Sidebar = () => {
                 <HiHome className="w-7 h-7" onClick={() => router.push("/")} />
                 <span className="font-bold hidden xl:inline">Home</span>
             </div>
-
-            <Button className="bg-blue-500 text-white font-bold px-4 py-2 mt-4 hover:bg-blue-600 hover:brightness-100 rounded-full transition-all duration-200 w-48 h-9 shadow-md">
-                <SignOutButton />
-            </Button>
+            {session ? (
+                <Button
+                    className="bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-lg"
+                    onClick={() => signOut()}
+                >
+                    Sign Out
+                </Button>
+            ) : (
+                <Button
+                    className="bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-lg"
+                    onClick={() => signIn()}
+                >
+                    Sign In
+                </Button>
+            )}
         </div>
     );
 };

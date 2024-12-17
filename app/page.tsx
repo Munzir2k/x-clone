@@ -5,7 +5,7 @@ import Sidebar from "./components/Sidebar";
 import News from "./components/News";
 import { ThemeToggle } from "@/app/Provider/ThemeToggle";
 import Search from "./components/Search";
-import { UserButton } from "@clerk/nextjs";
+import { Button } from "./components/button";
 
 export default function Home() {
     return (
@@ -19,7 +19,6 @@ export default function Home() {
                 <div className="flex items-center gap-6">
                     <ThemeToggle />
                     <Search />
-                    <UserButton />
                 </div>
                 <News />
             </div>
