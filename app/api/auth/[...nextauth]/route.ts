@@ -15,6 +15,20 @@ const handler = NextAuth({
             clientSecret: process.env.GITHUB_CLIENT_SECRET!,
         }),
     ],
+
+    callbacks: {
+        async session({ session, token }) {
+            token.picture = session.user?.image;
+            // @ts-ignore
+            session.user.username = session.user.name
+                .split(" ")
+                .join("")
+                .toLocaleLowerCase();
+            // @ts-ignore
+            session.user.uid = token.sub;
+            return session;
+        },
+    },
 });
 
 export { handler as GET, handler as POST };
